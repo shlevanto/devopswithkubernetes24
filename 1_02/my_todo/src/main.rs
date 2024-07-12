@@ -3,6 +3,8 @@ use dotenv::dotenv;
 
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 
+use my_todo::config::port;
+
 #[get("/")]
 async fn home() -> impl Responder {
     HttpResponse::Ok().body("Running.")
@@ -12,7 +14,7 @@ async fn home() -> impl Responder {
 async fn main() -> std::io::Result<()> {
     dotenv().ok();
     
-    let port: u16 = env::var("PORT").unwrap().parse::<u16>().unwrap();
+    let port: u16 = port();//env::var("PORT").unwrap().parse::<u16>().unwrap();
     
     println!("Server started in port {}", port);
 
